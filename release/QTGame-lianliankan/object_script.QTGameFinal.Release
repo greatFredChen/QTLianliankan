@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\widget.o
+./release\gamemodel.o
+./release\logindialog.o
+./release\rankdialog.o
+./release\loginfo.o
+./release\maindialog.o
+./release\sounddialog.o
+./release\qrc_sound.o
+./release\qrc_desktop.o
+./release\moc_widget.o
+./release\moc_logindialog.o
+./release\moc_rankdialog.o
+./release\moc_maindialog.o
+./release\moc_sounddialog.o
+);

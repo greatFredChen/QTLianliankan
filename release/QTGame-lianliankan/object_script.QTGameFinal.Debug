@@ -1,0 +1,17 @@
+INPUT(
+./debug\main.o
+./debug\widget.o
+./debug\gamemodel.o
+./debug\logindialog.o
+./debug\rankdialog.o
+./debug\loginfo.o
+./debug\maindialog.o
+./debug\sounddialog.o
+./debug\qrc_sound.o
+./debug\qrc_desktop.o
+./debug\moc_widget.o
+./debug\moc_logindialog.o
+./debug\moc_rankdialog.o
+./debug\moc_maindialog.o
+./debug\moc_sounddialog.o
+);
