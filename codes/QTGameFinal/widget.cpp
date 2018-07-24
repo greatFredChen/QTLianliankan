@@ -50,7 +50,7 @@ Widget::Widget(QWidget *parent) :
     connect(Sounddlg,SIGNAL(playmusic()),this,SLOT(openmusicplayer()));
     connect(Sounddlg,SIGNAL(stopmusic()),this,SLOT(closemusicplayer()));
     connect(Sounddlg,SIGNAL(setplaying()),this,SLOT(setplaying()));
-    connect(this,SIGNAL(setsounddlg()),Sounddlg,SLOT(setpause()));
+    connect(this,SIGNAL(setsounddlg()),Sounddlg,SLOT(setPlaymode()));
 
     //展示分数！
     connect(this,SIGNAL(pleaseshowscore()),this,SLOT(showscore()));
@@ -181,6 +181,7 @@ void Widget::StartGame(GameDiffculty gamedif)//初始化游戏
     //跟我那个图书管理系统采取一样的办法..我发现QT里好难用相对路径...于是都是采用的绝对路径！
     musicplayer->setMedia(QUrl::fromLocalFile("./sound/bgm.mp3"));
     musicplayer->setVolume(50);
+    musicplayer->play();//播放音乐！
 }
 void Widget::on_picbutton_clicked()//图片点击事件
 {
@@ -390,7 +391,7 @@ void Widget::selectdifficulty()//设定难度
     delete qtimer;
     tim=180;
     //停掉音乐！-----通过向sounddlg发送设置暂停信号，使得sounddlg中的按钮样式变更并更改状态，从而消除bug！！
-
+    delete musicplayer;
     emit setsounddlg();
 
     //重绘!
@@ -445,9 +446,9 @@ void Widget::on_pushButton_3_clicked()//返回主菜单！
     }
 
 }
-void Widget::on_pushButton_2_clicked()//调节音量！！采用一个新窗口和slider进行音量的改变！
+void Widget::on_pushButton_2_clicked()//调节音量！！采用一个新窗口和slider进行音量的改变！music按钮！
 {
-    ui->pushButton->setChecked(true);
+    ui->pushButton->setChecked(true);//暂停游戏!
     Sounddlg->exec();
 }
 void Widget::setplayervolume(int i)

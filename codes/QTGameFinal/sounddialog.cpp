@@ -33,7 +33,7 @@ void sounddialog::on_pushButton_toggled(bool checked)
     else
         emit stopmusic();
 }
-void sounddialog::setpause()
+void sounddialog::setPlaymode()
 {
-    ui->pushButton->setChecked(true);
+    ui->pushButton->setChecked(false);
 }

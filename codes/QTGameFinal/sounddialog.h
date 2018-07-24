@@ -23,7 +23,7 @@ signals:
 private slots:
     void setlcdnumber(int);
     void on_pushButton_toggled(bool checked);
-    void setpause();
+    void setPlaymode();
 private:
     Ui::sounddialog *ui;
 protected:
