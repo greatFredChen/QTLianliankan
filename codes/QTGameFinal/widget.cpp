@@ -95,6 +95,7 @@ void Widget::paintEvent(QPaintEvent *event)//ÊÂ¼şÖØĞ´,½øĞĞ»­Ïß²Ù×÷£¡£¡QWidget²ÅÄ
 }
 void Widget::closeEvent(QCloseEvent *e)//Ö±½ÓÍË³ö£¡
 {
+    ui->pushButton->setChecked(true);
     int r=QMessageBox::warning(this,QString::fromLocal8Bit("Gaming"),QString::fromLocal8Bit("È·¶¨ÒªÖ±½ÓÍË³öÂğ£¿"),QMessageBox::Ok|QMessageBox::Cancel);
     if(r==QMessageBox::Ok){
         QPropertyAnimation *animation = new QPropertyAnimation(this,"windowOpacity");
@@ -105,8 +106,10 @@ void Widget::closeEvent(QCloseEvent *e)//Ö±½ÓÍË³ö£¡
        emit exitdirectly();
     }
 
-    if(r==QMessageBox::Cancel)
+    if(r==QMessageBox::Cancel){
+        ui->pushButton->setChecked(false);
         e->ignore();
+    }
 }
 void Widget::setgametimer()//ÓÎÏ·Ö÷²Ëµ¥Ê±¼ÆÊ±Æ÷Í£Ö¹ÔËĞĞ£¡
 {
@@ -269,6 +272,7 @@ void Widget::on_picbutton_clicked()//Í¼Æ¬µã»÷ÊÂ¼ş
                     //ÏÈ¼ÇÂ¼³É¼¨½øÈëtxt£¡
                     if(strcmp(Login->username,"Not login")!=0)//ËµÃ÷ÒÑ¾­µÇÂ½£¡
                     {
+                        gamemodel->setgamestatus(Win);
                         //
                         //gamemodel->grades=20;//²âÊÔ£¡
                         //
@@ -341,8 +345,11 @@ void Widget::time_withprogressbar()//¼ÆÊ±Æ÷Áª¶¯
         int r=QMessageBox::warning(this,QString::fromLocal8Bit("ÓÎÏ·ÌáĞÑ"),QString::fromLocal8Bit("ÄãÊäÁË£¡"),QMessageBox::Ok);
         gamemodel->setgamestatus(Lose);//ÅĞ¶¨ÎªÊä£¡
         //·µ»ØÖ÷½çÃæ£¡
-        if(r==QMessageBox::Ok)
+        if(r==QMessageBox::Ok){
+            qDebug()<<"you lose have a problem!"<<"\n";
         emit returntomenu();//·¢ËÍ·µ»ØĞÅºÅ£¡
+        }
+        return;
     }
     if(tim2>=30&&tim2<=60)
         ui->progressBar->setStyleSheet("QProgressBar#progressBar:chunk\
@@ -440,10 +447,13 @@ void Widget::on_pushButton_toggled(bool checked)//¿ªÊ¼/ÔİÍ£°´Å¥£¡
 
 void Widget::on_pushButton_3_clicked()//·µ»ØÖ÷²Ëµ¥£¡
 {
+    ui->pushButton->setChecked(true);
     int r=QMessageBox::warning(this,QString::fromLocal8Bit("Gaming"),QString::fromLocal8Bit("È·¶¨ÒªÍË»ØÖ÷²Ëµ¥Âğ?"),QMessageBox::Yes|QMessageBox::No);
     if(r==QMessageBox::Yes){
         emit returntomenu();
     }
+    else
+        ui->pushButton->setChecked(false);
 
 }
 void Widget::on_pushButton_2_clicked()//µ÷½ÚÒôÁ¿£¡£¡²ÉÓÃÒ»¸öĞÂ´°¿ÚºÍslider½øĞĞÒôÁ¿µÄ¸Ä±ä£¡music°´Å¥£¡

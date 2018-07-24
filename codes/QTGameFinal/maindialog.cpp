@@ -27,7 +27,8 @@ void MainDialog::Tomenu()//从游戏窗口返回菜单！！
     animation->setStartValue(0);
     animation->setEndValue(1);
     animation->start();
-    if(gamewidget)
+    gamewidget->hide();
+    //if(gamewidget)
     delete gamewidget;
 }
 void MainDialog::on_pushButton_clicked()//开始游戏
@@ -37,6 +38,7 @@ void MainDialog::on_pushButton_clicked()//开始游戏
     connect(gamewidget,SIGNAL(exitdirectly()),this,SLOT(Toexit()));
     qDebug()<<"maindialog user"<<this->Login->username<<"\n";
     gamewidget->Login=this->Login;
+    qDebug()<<"gamewidget login userscore:"<<gamewidget->Login->userscore<<"maindialog:"<<this->Login->userscore<<"\n";
     //进入游戏界面动画！
     QPropertyAnimation *animation = new QPropertyAnimation(gamewidget,"windowOpacity");
     animation->setDuration(1000);
@@ -44,6 +46,7 @@ void MainDialog::on_pushButton_clicked()//开始游戏
     animation->setEndValue(1);
     animation->start();
     gamewidget->show();
+    //delete gamewidget;
     this->hide();
 }
 void MainDialog::Toexit()
